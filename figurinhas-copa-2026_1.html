@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figurinhas Copa 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--v:#1D9E75;--vd:#0F6E56;--vbg:#0d2b1e;--am:#EF9F27;--ambg:#2b1f0a;--bg:#0f1117;--bg2:#181c25;--bg3:#1e2330;--bdr:rgba(255,255,255,0.08);--bdr2:rgba(255,255,255,0.15);--txt:#f0f0f0;--txt2:#9aa0b0;--txt3:#6b7280;--r:12px;--rs:8px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+header{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:12px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+header h1{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--v);line-height:1}
+header .sub{font-size:11px;color:var(--txt2);margin-top:2px}
+.main{max-width:860px;margin:0 auto;padding:16px 14px 80px}
+.tabs{display:flex;gap:4px;background:var(--bg2);border-radius:var(--r);padding:4px;margin-bottom:18px;border:1px solid var(--bdr)}
+.tab{flex:1;padding:9px 6px;border:none;background:transparent;border-radius:var(--rs);cursor:pointer;font-size:12px;color:var(--txt2);font-family:'Inter',sans-serif;font-weight:500;transition:all .15s}
+.tab.active{background:var(--v);color:#fff}
+.tab:hover:not(.active){background:var(--bg3);color:var(--txt)}
+.sec{display:none}.sec.active{display:block}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);padding:14px 10px;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:var(--txt2);margin-top:3px}
+.filter-row{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.fbtn{padding:5px 13px;border:1px solid var(--bdr2);border-radius:20px;cursor:pointer;background:transparent;font-size:12px;color:var(--txt2);font-family:'Inter',sans-serif;transition:all .15s}
+.fbtn.active{background:var(--txt);color:var(--bg);border-color:var(--txt)}
+.fbtn:hover:not(.active){border-color:var(--txt2);color:var(--txt)}
+#busca{padding:6px 14px;border:1px solid var(--bdr2);border-radius:20px;background:var(--bg2);color:var(--txt);font-size:12px;font-family:'Inter',sans-serif;width:180px;outline:none}
+#busca::placeholder{color:var(--txt3)}
+#busca:focus{border-color:var(--v)}
+.sel-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:8px;cursor:pointer;transition:border-color .15s;user-select:none}
+.sel-header:hover{border-color:var(--bdr2)}
+.sel-flag{font-size:18px;margin-right:10px}
+.sel-name{font-size:13px;font-weight:600}
+.sel-info{font-size:11px;color:var(--txt2)}
+.chev{font-size:12px;color:var(--txt3);transition:transform .2s;display:inline-block}
+.chev.open{transform:rotate(180deg)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:7px;margin-bottom:12px;padding:0 2px}
+.pcard{border:1px solid var(--bdr);border-radius:var(--rs);padding:11px 12px;cursor:pointer;transition:all .15s;background:var(--bg2);user-select:none}
+.pcard:hover{border-color:var(--bdr2)}
+.pcard.tem{background:var(--vbg);border-color:var(--v)}
+.pcard.troca{background:var(--ambg);border-color:var(--am)}
+.pname{font-size:12px;font-weight:600;color:var(--txt);margin-bottom:3px;line-height:1.3}
+.pnum{font-size:10px;color:var(--txt3);margin-bottom:2px}
+.ppts{font-size:11px;margin-bottom:3px}
+.pstat{font-size:10px;font-weight:500}
+.pstat.tem{color:var(--v)}.pstat.troca{color:var(--am)}.pstat.falta{color:var(--txt3)}
+.lenda{color:#a78bfa}.rara{color:#60a5fa}.boa{color:var(--v)}.comum{color:var(--txt3)}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);padding:16px 18px;margin-bottom:14px}
+.ctitle{font-size:14px;font-weight:600;margin-bottom:14px}
+.btn{padding:8px 16px;border:1px solid var(--bdr2);border-radius:var(--rs);cursor:pointer;background:transparent;color:var(--txt);font-size:12px;font-family:'Inter',sans-serif;font-weight:500;transition:all .15s}
+.btn:hover{background:var(--bg3)}
+.btn.green{background:var(--v);border-color:var(--v);color:#fff}
+.btn.green:hover{background:var(--vd)}
+.btn.red{border-color:#E24B4A;color:#E24B4A}
+input[type=text],select{padding:9px 12px;border:1px solid var(--bdr2);border-radius:var(--rs);background:var(--bg3);color:var(--txt);font-size:13px;font-family:'Inter',sans-serif;outline:none;width:100%}
+input[type=text]:focus,select:focus{border-color:var(--v)}
+select option{background:var(--bg2)}
+.trow{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--rs);margin-bottom:7px;font-size:12px}
+.mrow{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg3);border:1px solid rgba(29,158,117,0.3);border-radius:var(--rs);margin-bottom:7px;font-size:12px}
+.fblock{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px;margin-bottom:10px}
+.empty{text-align:center;color:var(--txt2);font-size:13px;padding:24px;border:1px dashed var(--bdr2);border-radius:var(--r)}
+.barena{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r);padding:20px;text-align:center}
+.bcards{display:flex;justify-content:center;align-items:center;gap:2rem;margin:14px 0}
+.bcard{width:96px;height:130px;border-radius:var(--r);border:1.5px solid var(--bdr2);display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg2);cursor:pointer;transition:transform .15s;user-select:none;padding:8px}
+.bcard:hover{transform:scale(1.04)}
+.bcard.win{border-color:var(--v);background:var(--vbg)}
+.bcard.lose{border-color:#E24B4A;background:#1f0d0d}
+.bem{font-size:24px}
+.bnm{font-size:10px;color:var(--txt2);margin-top:3px;text-align:center;line-height:1.3}
+.bpt{font-size:13px;font-weight:600;margin-top:3px}
+.placar{display:flex;justify-content:center;gap:2.5rem;margin:12px 0}
+.pln{font-size:28px;font-weight:600}.pll{font-size:11px;color:var(--txt2)}
+.grupo-badge{font-size:10px;background:var(--bg3);border:1px solid var(--bdr);border-radius:4px;padding:1px 6px;color:var(--txt3);margin-left:6px;font-weight:400}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>⚽ Figurinhas Copa 2026</h1>
+    <div class="sub">980 figurinhas · 48 seleções · Album oficial Panini</div>
+  </div>
+</header>
+<div class="main">
+<div class="tabs">
+  <button class="tab active" onclick="goTab('album',this)">Album</button>
+  <button class="tab" onclick="goTab('trocas',this)">Trocas</button>
+  <button class="tab" onclick="goTab('amigos',this)">Amigos</button>
+  <button class="tab" onclick="goTab('bafo',this)">Bafo</button>
+</div>
+
+<div id="tab-album" class="sec active">
+  <div class="stats-row" id="stats-row"></div>
+  <div class="filter-row">
+    <button class="fbtn active" onclick="setF('todos',this)">Todos</button>
+    <button class="fbtn" onclick="setF('tem',this)">Tenho</button>
+    <button class="fbtn" onclick="setF('troca',this)">Para troca</button>
+    <button class="fbtn" onclick="setF('falta',this)">Faltam</button>
+    <input id="busca" type="text" placeholder="Buscar jogador..." oninput="renderAlbum()">
+  </div>
+  <div id="album-list"></div>
+</div>
+
+<div id="tab-trocas" class="sec">
+  <div class="card">
+    <div class="ctitle">Minhas figurinhas para troca</div>
+    <div id="lista-troca"></div>
+  </div>
+</div>
+
+<div id="tab-amigos" class="sec">
+  <div class="card">
+    <div class="ctitle">Adicionar amigo</div>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <input type="text" id="nome-amigo" placeholder="Nome do amigo">
+      <button class="btn green" onclick="addAmigo()" style="white-space:nowrap;min-width:120px">+ Adicionar</button>
+    </div>
+    <div id="lista-amigos-ui"></div>
+  </div>
+  <div class="card" id="mesa-card" style="display:none">
+    <div class="ctitle">Mesa de trocas automatica</div>
+    <p style="font-size:12px;color:var(--txt2);margin-bottom:12px">Trocas com diferenca de ate 3 pontos entre as figurinhas</p>
+    <div id="lista-matches"></div>
+  </div>
+</div>
+
+<div id="tab-bafo" class="sec">
+  <div class="card">
+    <div class="ctitle">Bafo virtual</div>
+    <p style="font-size:12px;color:var(--txt2);margin-bottom:14px">Sorteia uma figurinha do seu inventario. Maior pontuacao leva!</p>
+    <div class="barena">
+      <div class="bcards">
+        <div><div style="font-size:11px;color:var(--txt2);margin-bottom:6px">Voce</div>
+          <div class="bcard" id="b-eu" onclick="jogar()">
+            <div class="bem" id="b-eu-em">?</div>
+            <div class="bnm" id="b-eu-nm">toque para jogar</div>
+            <div class="bpt" id="b-eu-pt"></div>
+          </div>
+        </div>
+        <div style="font-size:18px;font-weight:600;color:var(--txt3);padding-top:20px">vs</div>
+        <div><div style="font-size:11px;color:var(--txt2);margin-bottom:6px">Oponente</div>
+          <div class="bcard" id="b-adv">
+            <div class="bem" id="b-adv-em">?</div>
+            <div class="bnm" id="b-adv-nm"></div>
+            <div class="bpt" id="b-adv-pt"></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:13px;font-weight:600;min-height:20px;margin-bottom:10px" id="b-res"></div>
+      <div class="placar">
+        <div><div class="pln" id="pl-eu">0</div><div class="pll">Voce</div></div>
+        <div><div class="pln" id="pl-adv">0</div><div class="pll">Oponente</div></div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center">
+        <button class="btn green" onclick="jogar()">Bater figurinha</button>
+        <button class="btn" onclick="resetBafo()">Zerar placar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const SELS = [
+  {g:"A",n:"Mexico",f:"🇲🇽",nv:6,j:["Luis Malagon","Johan Vasquez","Jorge Sanchez","Cesar Montes","Jesus Gallardo","Israel Reyes","Diego Lainez","Carlos Rodriguez","Edson Alvarez","Orbelin Pineda","Marcel Ruiz","Erick Sanchez","Hirving Lozano","Santiago Gimenez","Raul Jimenez","Alexis Vega","Roberto Alvarado","Cesar Huerta"]},
+  {g:"A",n:"Africa do Sul",f:"🇿🇦",nv:3,j:["Ronwen Williams","Sipho Chaine","Aubrey Modiba","Samukele Kabini","Mbekezeli Mbokazi","Khulumani Ndamane","Siyabonga Ngezana","Khuliso Mudau","Nkosinathi Sibisi","Teboho Mokoena","Thalente Mbatha","Bathuisi Aubaas","Yaya Sithole","Sipho Mbule","Lyle Foster","Ioraam Rayners","Mohau Nkota","Oswin Appolis"]},
+  {g:"A",n:"Coreia do Sul",f:"🇰🇷",nv:5,j:["Hyeon-woo Jo","Seung-Gyu Kim","Min-jae Kim","Yu-min Cho","Young-woo Seol","Han-beom Lee","Tae-seok Lee","Myung-jae Lee","Jae-sung Lee","In-beom Hwang","Kang-in Lee","Seung-ho Paik","Jens Castrop","Dong-gyeong Lee","Gue-sung Cho","Heung-min Son","Hee-chan Hwang","Hyeon-Gyu Oh"]},
+  {g:"A",n:"Republica Tcheca",f:"🇨🇿",nv:5,j:["Matej Kovar","Jindrich Stanek","Ladislav Krejci","Vladimir Coufal","Jaroslav Zeleny","Tomas Holes","David Zima","Michal Sadilek","Lukas Provod","Lukas Cerv","Tomas Soucek","Pavel Sulc","Matej Vydra","Vasil Kusej","Tomas Chory","Vaclav Cerny","Adam Hlozek","Patrik Schick"]},
+  {g:"B",n:"Canada",f:"🇨🇦",nv:6,j:["Dayne St. Clair","Alphonso Davies","Alistair Johnston","Samuel Adekugbe","Richie Laryea","Derek Cornelius","Moise Bombito","Kamal Miller","Stephen Eustaquio","Ismael Kone","Jonathan Osorio","Jacob Shaffelburg","Mathieu Choiniere","Niko Sigur","Tajon Buchanan","Liam Millar","Cyle Larin","Jonathan David"]},
+  {g:"B",n:"Bosnia e Herzegovina",f:"🇧🇦",nv:4,j:["Nikola Vasilj","Amar Dedic","Sead Kolasinac","Tarik Muharemovic","Nihad Mujakic","Nikola Katic","Amir Hadziahmetovic","Benjamin Tahirovic","Armin Gigovic","Ivan Sunjic","Ivan Basic","Dzenis Burnic","Esmir Bajraktarevic","Amar Memic","Ermedin Demirovic","Edin Dzeko","Samed Bazdar","Haris Tabaković"]},
+  {g:"B",n:"Catar",f:"🇶🇦",nv:3,j:["Meshaal Barsham","Sultan Albrake","Lucas Mendes","Homam Ahmed","Boualem Khoukhi","Pedro Miguel","Tarek Salman","Mohamed Al-Mannai","Karim Boudiaf","Assim Madibo","Ahmed Fatehi","Mohammed Waad","Abdulaziz Hatem","Hassan Al-Haydos","Edmilson Junior","Akram Hassan Afif","Ahmed Al Ganehi","Almoez Ali"]},
+  {g:"B",n:"Suica",f:"🇨🇭",nv:7,j:["Gregor Kobel","Yvon Mvogo","Manuel Akanji","Ricardo Rodriguez","Nico Elvedi","Aurele Amenda","Silvan Widmer","Granit Xhaka","Denis Zakaria","Remo Freuler","Fabian Rieder","Ardon Jashari","Johan Manzambi","Michel Aebischer","Breel Embolo","Ruben Vargas","Dan Ndoye","Zeki Amdouni"]},
+  {g:"C",n:"Brasil",f:"🇧🇷",nv:10,j:["Alisson","Bento","Marquinhos","Eder Militao","Gabriel Magalhaes","Danilo","Wesley","Lucas Paqueta","Casemiro","Bruno Guimaraes","Luiz Henrique","Vinicius Junior","Rodrygo","Joao Pedro","Matheus Cunha","Gabriel Martinelli","Raphinha","Estevao"]},
+  {g:"C",n:"Marrocos",f:"🇲🇦",nv:6,j:["Yassine Bounou","Munir El Kajoui","Achraf Hakimi","Noussair Mazraoui","Nayef Aguerd","Romain Saiss","Jawad El Yamiq","Adam Masina","Sofyan Amrabat","Azzedine Ounahi","Eliesse Ben Seghir","Bilal El Khannouss","Ismael Saibari","Youssef En-Nesyri","Abde Ezzalzouli","Soufiane Rahimi","Brahim Diaz","Ayoub El Kaabi"]},
+  {g:"C",n:"Haiti",f:"🇭🇹",nv:2,j:["Johny Placide","Carlens Arcus","Martin Experience","Jean-Kevin Duverne","Ricardo Ade","Duke Lacroix","Garven Metusala","Hannes Delcroix","Leverton Pierre","Danley Jean Jacques","Jean-Ricner Bellegarde","Christopher Attys","Derrick Etienne Jr.","Josue Casimir","Ruben Providence","Duckens Nazon","Louicius Deedson","Frantzdy Pierrot"]},
+  {g:"C",n:"Escocia",f:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",nv:5,j:["Angus Gunn","Jack Hendry","Kieran Tierney","Aaron Hickey","Andrew Robertson","Scott McKenna","John Souttar","Anthony Ralston","Grant Hanley","Scott McTominay","Billy Gilmour","Lewis Ferguson","Ryan Christie","Kenny McLean","John McGinn","Lyndon Dykes","Che Adams","Ben Doak"]},
+  {g:"D",n:"Estados Unidos",f:"🇺🇸",nv:6,j:["Matt Freese","Chris Richards","Tim Ream","Mark McKenzie","Alex Freeman","Antonee Robinson","Tyler Adams","Tanner Tessmann","Weston McKennie","Christian Roldan","Timothy Weah","Diego Luna","Malik Tillman","Christian Pulisic","Brenden Aaronson","Ricardo Pepi","Haji Wright","Folarin Balogun"]},
+  {g:"D",n:"Paraguai",f:"🇵🇾",nv:4,j:["Roberto Fernandez","Orlando Gill","Gustavo Gomez","Fabian Balbuena","Juan Jose Caceres","Omar Alderete","Junior Alonso","Mathias Villasanti","Diego Gomez","Damian Bobadilla","Andres Cubas","Matias Galarza","Julio Enciso","Richard Sanchez","Antonio Sanabria","Roberto Ovelar","Gabriel Avalos","Jorge Morel"]},
+  {g:"D",n:"Australia",f:"🇦🇺",nv:4,j:["Mathew Ryan","Joe Gauci","Harry Souttar","Alessandro Circati","Jordan Bos","Aziz Behich","Cameron Burgess","Lewis Miller","Milos Degenek","Jackson Irvine","Riley McGree","Aiden O'Neill","Connor Metcalfe","Patrick Yazbek","Craig Goodwin","Kusini Yengi","Nestory Irankunda","Mohamed Toure"]},
+  {g:"D",n:"Turquia",f:"🇹🇷",nv:6,j:["Ugurcan Cakir","Mert Muldur","Zeki Celik","Abdulkerim Bardakci","Caglar Soyuncu","Merih Demiral","Ferdi Kadioglu","Kaan Ayhan","Ismail Yuksek","Hakan Calhanoglu","Orkun Kokcu","Arda Guler","Irfan Can Kahveci","Yunus Akgun","Can Uzun","Baris Alper Yilmaz","Kerem Akturkoglu","Kenan Yildiz"]},
+  {g:"E",n:"Alemanha",f:"🇩🇪",nv:9,j:["Marc-Andre ter Stegen","Jonathan Tah","David Raum","Nico Schlotterbeck","Antonio Rudiger","Waldemar Anton","Ridle Baku","Maximilian Mittelstadt","Joshua Kimmich","Florian Wirtz","Felix Nmecha","Leon Goretzka","Jamal Musiala","Serge Gnabry","Kai Havertz","Leroy Sane","Karim Adeyemi","Nick Woltemade"]},
+  {g:"E",n:"Curacao",f:"🇨🇼",nv:3,j:["Eloy Room","Armando Obispo","Sherel Floranus","Jurien Gaari","Joshua Brenet","Roshon Van Eijma","Shurandy Sambo","Livano Comenencia","Godfried Roemeratoe","Juninho Bacuna","Leandro Bacuna","Tahith Chong","Kenji Gorre","Jearl Margaritha","Jurgen Locadia","Jeremy Antonisse","Gervane Kastaneer","Sontje Hansen"]},
+  {g:"E",n:"Costa do Marfim",f:"🇨🇮",nv:5,j:["Yahia Fofana","Ghislain Konan","Wilfried Singo","Odilon Kossounou","Evan Ndicka","Willy Boly","Emmanuel Agbadou","Ousmane Diomande","Franck Kessie","Seko Fofana","Ibrahim Sangare","Jean-Philippe Gbamin","Amad Diallo","Sebastien Haller","Simon Adingra","Yan Diomande","Evann Guessand","Oumar Diakite"]},
+  {g:"E",n:"Equador",f:"🇪🇨",nv:5,j:["Hernan Galindez","Gonzalo Valle","Piero Hincapie","Pervis Estupinan","Willian Pacho","Angelo Preciado","Joel Ordonez","Moises Caicedo","Alan Franco","Kendry Paez","Pedro Vite","John Yeboah","Leonardo Campana","Gonzalo Plata","Nilson Angulo","Alan Minda","Kevin Rodriguez","Enner Valencia"]},
+  {g:"F",n:"Holanda",f:"🇳🇱",nv:8,j:["Bart Verbruggen","Virgil van Dijk","Micky van de Ven","Jurrien Timber","Denzel Dumfries","Nathan Ake","Jeremie Frimpong","Jan Paul van Hecke","Tijjani Reijnders","Ryan Gravenberch","Teun Koopmeiners","Frenkie de Jong","Xavi Simons","Justin Kluivert","Memphis Depay","Donyell Malen","Wout Weghorst","Cody Gakpo"]},
+  {g:"F",n:"Japao",f:"🇯🇵",nv:5,j:["Zion Suzuki","Henry Mochizuki","Ayumu Seko","Junnosuke Suzuki","Shogo Taniguchi","Tsuyoshi Watanabe","Kaishu Sano","Yuki Soma","Ao Tanaka","Daichi Kamada","Takefusa Kubo","Ritsu Doan","Keito Nakamura","Takumi Minamino","Shuto Machino","Junya Ito","Koki Ogawa","Ayase Ueda"]},
+  {g:"F",n:"Suecia",f:"🇸🇪",nv:6,j:["Victor Johansson","Isak Hien","Gabriel Gudmundsson","Emil Holm","Victor Nilsson Lindelof","Gustaf Lagerbielke","Lucas Bergvall","Hugo Larsson","Jesper Karlstrom","Yasin Ayari","Mattias Svanberg","Daniel Svensson","Ken Sema","Roony Bardghji","Dejan Kulusevski","Anthony Elanga","Alexander Isak","Viktor Gyokeres"]},
+  {g:"F",n:"Tunisia",f:"🇹🇳",nv:4,j:["Bechir Ben Said","Aymen Dahmen","Van Valery","Montassar Talbi","Yassine Meriah","Ali Abdi","Dylan Bronn","Ellyes Skhiri","Aissa Laidouni","Ferjani Sassi","Mohamed Ali Ben Romdhane","Hannibal Mejbri","Elias Achouri","Elias Saad","Hazem Mastouri","Ismael Gharbi","Sayfallah Ltaief","Naim Sliti"]},
+  {g:"G",n:"Belgica",f:"🇧🇪",nv:8,j:["Thibaut Courtois","Arthur Theate","Timothy Castagne","Zeno Debast","Brandon Mechele","Maxim De Cuyper","Thomas Meunier","Youri Tielemans","Amadou Onana","Nicolas Raskin","Alexis Saelemaekers","Hans Vanaken","Kevin De Bruyne","Jeremy Doku","Charles De Ketelaere","Leandro Trossard","Lois Openda","Romelu Lukaku"]},
+  {g:"G",n:"Egito",f:"🇪🇬",nv:5,j:["Mohamed El Shenawy","Mohamed Hany","Mohamed Hamdy","Yasser Ibrahim","Khaled Sobhi","Ramy Rabia","Hossam Abdelmaguid","Ahmed Fatouh","Marwan Attia","Zizo","Hamdy Fathy","Mohamed Lasheen","Emam Ashour","Osama Faisal","Mohamed Salah","Mostafa Mohamed","Trezeguet","Omar Marmoush"]},
+  {g:"G",n:"Ira",f:"🇮🇷",nv:4,j:["Alireza Beiranvand","Morteza Pouraliganji","Ehsan Hajsafi","Milad Mohammadi","Shoja Khalilzadeh","Ramin Rezaeian","Hossein Kanaani","Sadegh Moharrami","Saleh Hardani","Saeed Ezatolahi","Saman Ghoddos","Omid Noorafkan","Roozbeh Cheshmi","Mohammad Mohebi","Sardar Azmoun","Mehdi Taremi","Alireza Jahanbakhsh","Ali Gholizadeh"]},
+  {g:"G",n:"Nova Zelandia",f:"🇳🇿",nv:3,j:["Max Crocombe","Alex Paulsen","Michael Boxall","Liberato Cacace","Tim Payne","Tyler Bindon","Francis de Vries","Finn Surman","Joe Bell","Sarpreet Singh","Ryan Thomas","Matthew Garbett","Marko Stamenic","Ben Old","Chris Wood","Elijah Just","Callum McCowatt","Kosta Barbarouses"]},
+  {g:"H",n:"Espanha",f:"🇪🇸",nv:9,j:["Unai Simon","Robin Le Normand","Aymeric Laporte","Dean Huijsen","Pedro Porro","Dani Carvajal","Marc Cucurella","Martin Zubimendi","Rodri","Pedri","Fabian Ruiz","Mikel Merino","Lamine Yamal","Dani Olmo","Nico Williams","Ferran Torres","Alvaro Morata","Mikel Oyarzabal"]},
+  {g:"H",n:"Cabo Verde",f:"🇨🇻",nv:3,j:["Vozinha","Logan Costa","Pico","Diney","Steven Moreira","Wagner Pina","Joao Paulo","Yannick Semedo","Kevin Pina","Patrick Andrade","Jamiro Monteiro","Deroy Duarte","Garry Rodrigues","Jovane Cabral","Ryan Mendes","Dailon Livramento","Willy Semedo","Bebe"]},
+  {g:"H",n:"Arabia Saudita",f:"🇸🇦",nv:3,j:["Nawaf Alaqidi","Abdulrahman Al-Sanbi","Saud Abdulhamid","Nawaf Boushal","Jihad Thakri","Moteb Al-Harbi","Hassan Altambakti","Musab Aljuwayr","Ziyad Aljohani","Abdullah Alkhaibari","Nasser Aldawsari","Saleh Abu Alshamat","Marwan Alsahafi","Salem Aldawsari","Abdulrahman Al-Aboud","Feras Albrikan","Saleh Alshehri","Abdullah Al-Hamdan"]},
+  {g:"H",n:"Uruguai",f:"🇺🇾",nv:7,j:["Sergio Rochet","Santiago Mele","Ronald Araujo","Jose Maria Gimenez","Sebastian Caceres","Mathias Olivera","Guillermo Varela","Nahitan Nandez","Federico Valverde","Giorgian De Arrascaeta","Rodrigo Bentancur","Manuel Ugarte","Nicolas de la Cruz","Maxi Araujo","Darwin Nunez","Federico Vinas","Rodrigo Aguirre","Facundo Pellistri"]},
+  {g:"I",n:"Franca",f:"🇫🇷",nv:9,j:["Mike Maignan","Theo Hernandez","William Saliba","Jules Kounde","Ibrahima Konate","Dayot Upamecano","Lucas Digne","Aurelien Tchouameni","Eduardo Camavinga","Manu Kone","Adrien Rabiot","Michael Olise","Ousmane Dembele","Bradley Barcola","Desire Doue","Kingsley Coman","Hugo Ekitike","Kylian Mbappe"]},
+  {g:"I",n:"Senegal",f:"🇸🇳",nv:6,j:["Eduardo Mendy","Yehvann Diouf","Moussa Niakhate","Abdoulaye Seck","Ismail Jakobs","El Hadji Malick Diouf","Kalidou Koulibaly","Idrissa Gana Gueye","Pape Matar Sarr","Pape Gueye","Habib Diarra","Lamine Camara","Sadio Mane","Ismaila Sarr","Boulaye Dia","Iliman Ndiaye","Nicolas Jackson","Krepin Diatta"]},
+  {g:"I",n:"Iraque",f:"🇮🇶",nv:3,j:["Jalal Hassan","Rebin Sulaka","Hussein Ali","Akam Hashem","Merchas Doski","Zaid Tahseen","Manaf Younis","Zidane Iqbal","Amir Al-Ammari","Ibrahim Bayesh","Ali Jasim","Youssef Amyn","Aimar Sher","Marko Farji","Osama Rashid","Ali Al-Hamadi","Aymen Hussein","Mohanad Ali"]},
+  {g:"I",n:"Noruega",f:"🇳🇴",nv:7,j:["Orjan Nyland","Julian Ryerson","Leo Ostigard","Kristoffer Ajer","Marcus Holmgren Pedersen","David Moller Wolfe","Torbjorn Heggem","Morten Thorsby","Martin Odegaard","Sander Berge","Andreas Schjelderup","Patrick Berg","Erling Haaland","Alexander Sorloth","Aron Donnum","Jorgen Strand Larsen","Antonio Nusa","Oscar Bobb"]},
+  {g:"J",n:"Argentina",f:"🇦🇷",nv:9,j:["Emiliano Martinez","Nahuel Molina","Cristian Romero","Nicolas Otamendi","Nicolas Tagliafico","Leonardo Balerdi","Enzo Fernandez","Alexis Mac Allister","Rodrigo De Paul","Exequiel Palacios","Leandro Paredes","Nico Paz","Franco Mastantuono","Nico Gonzalez","Lionel Messi","Lautaro Martinez","Julian Alvarez","Giuliano Simeone"]},
+  {g:"J",n:"Algeria",f:"🇩🇿",nv:5,j:["Rais M'bolhi","Alexandre Oukidja","Aissa Mandi","Ramy Bensebaini","Djamel Benlamri","Samy Mefta","Mohamed Amine Tougai","Mehdi Zerkane","Youcef Atal","Samir Nasri","Sofiane Feghouli","Ismael Bennacer","Riyad Mahrez","Islam Slimani","Baghdad Bounedjah","Said Benrahma","Andy Delort","Abdelkader Bedrane"]},
+  {g:"J",n:"Polonia",f:"🇵🇱",nv:5,j:["Wojciech Szczesny","Lukasz Skorupski","Jan Bednarek","Bartosz Bereszynski","Tymoteusz Puchacz","Kamil Glik","Matty Cash","Grzegorz Krychowiak","Piotr Zielinski","Mateusz Klich","Nicola Zalewski","Sebastian Szymanski","Przemyslaw Frankowski","Arkadiusz Milik","Robert Lewandowski","Karol Swiderski","Michal Skoras","Adam Buksa"]},
+  {g:"J",n:"Arabia Saudita 2",f:"🇸🇦",nv:3,j:[]},
+  {g:"K",n:"Portugal",f:"🇵🇹",nv:8,j:["Diogo Costa","Rui Patricio","Ruben Dias","Joao Cancelo","Nuno Mendes","Pepe","Antonio Silva","Danilo Pereira","Vitinha","Bruno Fernandes","Bernardo Silva","Joao Palhinha","Rafael Leao","Joao Felix","Diogo Jota","Goncalo Ramos","Cristiano Ronaldo","Pedro Neto"]},
+  {g:"K",n:"Inglaterra",f:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",nv:8,j:["Jordan Pickford","Aaron Ramsdale","Reece James","Trent Alexander-Arnold","Luke Shaw","John Stones","Harry Maguire","Marc Guehi","Declan Rice","Jude Bellingham","Phil Foden","Bukayo Saka","Marcus Rashford","Raheem Sterling","Harry Kane","Jack Grealish","Ollie Watkins","Cole Palmer"]},
+  {g:"K",n:"Colombia",f:"🇨🇴",nv:6,j:["Camilo Vargas","David Ospina","Daniel Munoz","Davinson Sanchez","William Tesillo","Johan Mojica","Yerry Mina","Carlos Cuesta","Mateus Uribe","Juan Cuadrado","James Rodriguez","Jefferson Lerma","Richard Rios","Luis Diaz","Jhon Duran","Radamel Falcao","Jhon Cordoba","Rafael Santos Borre"]},
+  {g:"K",n:"Gana",f:"🇬🇭",nv:4,j:["Lawrence Ati-Zigi","Joseph Wollacott","Daniel Amartey","Alexander Djiku","Tariq Lamptey","Andy Yiadom","Abdul-Rahman Baba","Iddrisu Baba","Thomas Partey","Andre Ayew","Jordan Ayew","Inaki Williams","Mohammed Kudus","Antoine Semenyo","Felix Afena-Gyan","Osman Bukari","Richmond Boakye","Kwesi Sao"]},
+  {g:"L",n:"Italia",f:"🇮🇹",nv:7,j:["Gianluigi Donnarumma","Alex Meret","Giovanni Di Lorenzo","Alessandro Bastoni","Federico Dimarco","Giorgio Scalvini","Matteo Darmian","Federico Chiesa","Nicolo Barella","Jorginho","Sandro Tonali","Marco Verratti","Lorenzo Pellegrini","Giacomo Raspadori","Gianluca Scamacca","Ciro Immobile","Mattia Zaccagni","Davide Frattesi"]},
+  {g:"L",n:"Croacia",f:"🇭🇷",nv:7,j:["Dominik Livakovic","Josip Stanisic","Josko Gvardiol","Dejan Lovren","Ivan Perisic","Borna Barisic","Josip Sutalo","Luka Modric","Mateo Kovacic","Marcelo Brozovic","Mario Pasalic","Lovro Majer","Ivan Kramaric","Ante Budimir","Andrej Kramaric","Bruno Petkovic","Nikola Vlasic","Martin Baturina"]},
+  {g:"L",n:"Panama",f:"🇵🇦",nv:4,j:["Luis Mejia","Orlando Mosquera","Fidel Escobar","Harold Cummings","Roderick Miller","Eric Davis","Andres Andrade","Edgar Barcenas","Adalberto Carrasquilla","Alberto Quintero","Ismael Diaz","Cecilio Waterman","Jose Fajardo","Rolando Blackburn","Roberto Nurse","Cesar Yanis","Frederic Pinto","Christiano Garibaldo"]},
+  {g:"L",n:"Islandia",f:"🇮🇸",nv:4,j:["Runar Alex Runarsson","Ingvar Jonsson","Alfons Sampsted","Kari Arnason","Brynjar Bjarnason","Sverrir Ingason","Hordur Magnusson","Willum Thor Willumsson","Aron Gunnarsson","Gylfi Sigurdsson","Birkir Bjarnason","Emil Hallfredsson","Johann Gudmundsson","Jon Dadi Bodvarsson","Kolbeinn Sigthorsson","Albert Gudmundsson","Sveinn Ari Stefansson","Mikael Anderson"]},
+];
+
+function pts(j,nv){
+  const vN=(nv/10)*4;
+  const famosos=["Messi","Ronaldo","Mbappe","Vinicius","Bellingham","Haaland","Pedri","Salah","Modric","De Bruyne","Neymar","Son","Kane","Yamal","Wirtz"];
+  const isFamoso=famosos.some(f=>j.toLowerCase().includes(f.toLowerCase()));
+  const vJ=isFamoso?4.5:2+(Math.sin(j.length*7+nv)*1.5);
+  const vG=Math.abs(Math.sin(j.length*3))*2;
+  const vF=isFamoso?3.5:(Math.abs(Math.cos(j.length*5))*3);
+  return Math.round((vN+vJ+vG+vF)*10)/10;
+}
+
+function tier(p){
+  if(p>=13) return {l:"Lendaria",c:"lenda",i:"★★★★★"};
+  if(p>=10) return {l:"Rara",c:"rara",i:"★★★★☆"};
+  if(p>=7) return {l:"Boa",c:"boa",i:"★★★☆☆"};
+  return {l:"Comum",c:"comum",i:"★★☆☆☆"};
+}
+
+const JOGS = [];
+SELS.forEach(s=>{
+  s.j.forEach((nome,idx)=>{
+    const p=pts(nome,s.nv);
+    JOGS.push({id:s.n+'-'+idx,nome,sel:s.n,flag:s.f,grupo:s.g,nv:s.nv,pts:p,num:idx+1});
+  });
+});
+
+let EST=JSON.parse(localStorage.getItem('fig26_est')||'{}');
+let AMI=JSON.parse(localStorage.getItem('fig26_ami')||'[]');
+let PL=JSON.parse(localStorage.getItem('fig26_pl')||'{"eu":0,"adv":0}');
+function salvar(){localStorage.setItem('fig26_est',JSON.stringify(EST));localStorage.setItem('fig26_ami',JSON.stringify(AMI));localStorage.setItem('fig26_pl',JSON.stringify(PL));}
+
+let filtro='todos';
+let col={};
+
+function setF(f,btn){filtro=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAlbum();}
+
+function goTab(t,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  btn.classList.add('active');
+  if(t==='album')renderAlbum();
+  if(t==='trocas')renderTrocas();
+  if(t==='amigos')renderAmigos();
+  if(t==='bafo'){document.getElementById('pl-eu').textContent=PL.eu;document.getElementById('pl-adv').textContent=PL.adv;}
+}
+
+function st(id){return EST[id]||'falta';}
+
+function toggle(id){
+  const c=st(id);
+  EST[id]=c==='falta'?'tem':c==='tem'?'troca':'falta';
+  salvar();renderAlbum();renderStats();
+}
+
+function renderStats(){
+  const total=JOGS.length;
+  const tem=JOGS.filter(j=>st(j.id)==='tem').length;
+  const troca=JOGS.filter(j=>st(j.id)==='troca').length;
+  const pct=Math.round(((tem+troca)/total)*100);
+  document.getElementById('stats-row').innerHTML=`
+    <div class="stat"><div class="stat-n">${tem+troca}/${total}</div><div class="stat-l">Tenho</div></div>
+    <div class="stat"><div class="stat-n">${pct}%</div><div class="stat-l">Completo</div></div>
+    <div class="stat"><div class="stat-n" style="color:var(--am)">${troca}</div><div class="stat-l">Para troca</div></div>
+    <div class="stat"><div class="stat-n" style="color:#E24B4A">${total-tem-troca}</div><div class="stat-l">Faltam</div></div>`;
+}
+
+function renderAlbum(){
+  renderStats();
+  const busca=document.getElementById('busca').value.toLowerCase();
+  let html='';
+  const grupos=[...new Set(SELS.map(s=>s.g))];
+  grupos.forEach(g=>{
+    const selsDg=SELS.filter(s=>s.g===g);
+    selsDg.forEach(sel=>{
+      let js=JOGS.filter(j=>j.sel===sel.n);
+      if(filtro!=='todos') js=js.filter(j=>st(j.id)===filtro);
+      if(busca) js=js.filter(j=>j.nome.toLowerCase().includes(busca));
+      if(!js.length) return;
+      const total=JOGS.filter(j=>j.sel===sel.n).length;
+      const temN=JOGS.filter(j=>j.sel===sel.n&&(st(j.id)==='tem'||st(j.id)==='troca')).length;
+      const open=col[sel.n]!==false;
+      html+=`<div class="sel-header" onclick="toggleCol('${sel.n}')">
+        <div style="display:flex;align-items:center"><span class="sel-flag">${sel.f}</span><span class="sel-name">${sel.n}</span><span class="grupo-badge">Grupo ${g}</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span class="sel-info">${temN}/${total}</span><span class="chev ${open?'open':''}">▼</span></div>
+      </div>`;
+      if(open){
+        html+=`<div class="pgrid">`;
+        js.forEach(j=>{
+          const s=st(j.id);
+          const t=tier(j.pts);
+          html+=`<div class="pcard ${s}" onclick="toggle('${j.id}')">
+            <div class="pnum">#${j.num} · ${j.flag}</div>
+            <div class="pname">${j.nome}</div>
+            <div class="ppts ${t.c}">${j.pts} pts ${t.i}</div>
+            <div class="pstat ${s}">${s==='tem'?'✓ Tenho':s==='troca'?'⇄ Para troca':'Toque p/ marcar'}</div>
+          </div>`;
+        });
+        html+='</div>';
+      }
+    });
+  });
+  if(!html) html='<div class="empty">Nenhuma figurinha encontrada.</div>';
+  document.getElementById('album-list').innerHTML=html;
+}
+
+function toggleCol(n){col[n]=col[n]===false;renderAlbum();}
+
+function renderTrocas(){
+  const minhas=JOGS.filter(j=>st(j.id)==='troca');
+  const el=document.getElementById('lista-troca');
+  if(!minhas.length){el.innerHTML='<div class="empty">Nenhuma figurinha para troca ainda.<br>No album, clique 2x numa figurinha para marcar para troca.</div>';return;}
+  el.innerHTML=minhas.map(j=>{
+    const t=tier(j.pts);
+    return `<div class="trow">
+      <span style="font-size:16px">${j.flag}</span>
+      <div style="flex:1"><div style="font-size:12px;font-weight:600">${j.nome}</div><div style="font-size:10px;color:var(--txt2)">${j.sel} · #${j.num}</div></div>
+      <span class="${t.c}" style="font-size:12px">${j.pts} pts</span>
+      <button class="btn" style="font-size:10px;padding:4px 8px" onclick="EST['${j.id}']='falta';salvar();renderTrocas()">remover</button>
+    </div>`;
+  }).join('');
+}
+
+function addAmigo(){
+  const n=document.getElementById('nome-amigo').value.trim();
+  if(!n) return;
+  AMI.push({id:Date.now(),nome:n,figs:[]});
+  document.getElementById('nome-amigo').value='';
+  salvar();renderAmigos();
+}
+
+function renderAmigos(){
+  const el=document.getElementById('lista-amigos-ui');
+  if(!AMI.length){el.innerHTML='<div class="empty">Adicione amigos para montar a mesa de trocas!</div>';document.getElementById('mesa-card').style.display='none';return;}
+  el.innerHTML=AMI.map(a=>`
+    <div class="fblock">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-size:13px;font-weight:600">${a.nome} <span style="font-weight:400;font-size:11px;color:var(--txt2)">${a.figs.length} fig.</span></div>
+        <div style="display:flex;gap:6px">
+          <button class="btn" style="font-size:10px;padding:4px 8px" onclick="abrirAF(${a.id})">+ figurinha</button>
+          <button class="btn red" style="font-size:10px;padding:4px 8px" onclick="remAmigo(${a.id})">remover</button>
+        </div>
+      </div>
+      <div id="af-${a.id}" style="display:none;margin-bottom:8px;padding:10px;background:var(--bg2);border-radius:var(--rs)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <select id="afs-${a.id}" onchange="updateJogSel(${a.id})">
+            ${SELS.map(s=>`<option value="${s.n}">${s.f} ${s.n}</option>`).join('')}
+          </select>
+          <select id="afj-${a.id}">
+            ${JOGS.filter(j=>j.sel===SELS[0].n).map(j=>`<option value="${j.id}">${j.nome} (${j.pts}pts)</option>`).join('')}
+          </select>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="btn green" style="font-size:11px;padding:5px 12px" onclick="addFigAmi(${a.id})">adicionar</button>
+          <button class="btn" style="font-size:11px;padding:5px 12px" onclick="document.getElementById('af-${a.id}').style.display='none'">cancelar</button>
+        </div>
+      </div>
+      ${a.figs.length?`<div style="display:flex;flex-wrap:wrap;gap:4px">${a.figs.map(f=>{const t=tier(f.pts);return`<span style="background:var(--bg2);border:1px solid var(--bdr);border-radius:20px;font-size:10px;padding:2px 7px">${f.flag} ${f.nome.split(' ')[0]} <span class="${t.c}">${f.pts}p</span></span>`}).join('')}</div>`:''}
+    </div>`).join('');
+  calcMatches();
+}
+
+function abrirAF(id){
+  document.querySelectorAll('[id^="af-"]').forEach(e=>e.style.display='none');
+  document.getElementById('af-'+id).style.display='block';
+}
+function updateJogSel(id){
+  const sel=document.getElementById('afs-'+id).value;
+  const jEl=document.getElementById('afj-'+id);
+  jEl.innerHTML=JOGS.filter(j=>j.sel===sel).map(j=>`<option value="${j.id}">${j.nome} (${j.pts}pts)</option>`).join('');
+}
+function addFigAmi(id){
+  const jid=document.getElementById('afj-'+id).value;
+  const jog=JOGS.find(j=>j.id===jid);
+  const ami=AMI.find(a=>a.id===id);
+  if(jog&&ami&&!ami.figs.find(f=>f.id===jid)) ami.figs.push({id:jid,nome:jog.nome,pts:jog.pts,flag:jog.flag,sel:jog.sel});
+  salvar();renderAmigos();
+}
+function remAmigo(id){AMI=AMI.filter(a=>a.id!==id);salvar();renderAmigos();}
+
+function calcMatches(){
+  const mT=JOGS.filter(j=>st(j.id)==='troca');
+  const ms=[];
+  AMI.forEach(a=>{a.figs.forEach(f=>{mT.forEach(m=>{if(Math.abs(m.pts-f.pts)<=3&&m.id!==f.id) ms.push({ami:a.nome,fa:f,mi:m});});});});
+  const mesa=document.getElementById('mesa-card');
+  if(!ms.length){mesa.style.display='none';return;}
+  mesa.style.display='block';
+  document.getElementById('lista-matches').innerHTML=ms.map(m=>`
+    <div class="mrow">
+      <span>${m.mi.flag}</span>
+      <div style="flex:1"><strong style="font-size:12px">${m.mi.nome}</strong> <span style="font-size:10px;color:var(--txt2)">${m.mi.pts}pts</span></div>
+      <span style="color:var(--txt3)">⇄</span>
+      <div style="flex:1;text-align:right"><span>${m.fa.flag}</span> <strong style="font-size:12px">${m.fa.nome}</strong> <span style="font-size:10px;color:var(--txt2)">${m.fa.pts}pts</span></div>
+      <span style="font-size:10px;color:var(--v);font-weight:600">${m.ami}</span>
+    </div>`).join('');
+}
+
+const ADVN=["Mbappe","Haaland","Bellingham","Pedri","Salah","Kane","Wirtz","Yamal","Son","Modric","De Bruyne","Vinicius","Messi","Ronaldo"];
+function jogar(){
+  const inv=JOGS.filter(j=>st(j.id)==='tem'||st(j.id)==='troca');
+  if(!inv.length){alert('Adicione figurinhas ao inventario primeiro!');return;}
+  const minha=inv[Math.floor(Math.random()*inv.length)];
+  const advP=Math.round((4+Math.random()*11)*10)/10;
+  const advN=ADVN[Math.floor(Math.random()*ADVN.length)];
+  document.getElementById('b-eu').className='bcard';
+  document.getElementById('b-adv').className='bcard';
+  document.getElementById('b-res').textContent='...';
+  setTimeout(()=>{
+    document.getElementById('b-eu-em').textContent=minha.flag;
+    document.getElementById('b-eu-nm').textContent=minha.nome;
+    document.getElementById('b-eu-pt').textContent=minha.pts+' pts';
+    document.getElementById('b-adv-em').textContent='⚽';
+    document.getElementById('b-adv-nm').textContent=advN;
+    document.getElementById('b-adv-pt').textContent=advP+' pts';
+    if(minha.pts>advP){document.getElementById('b-eu').className='bcard win';document.getElementById('b-res').textContent='Voce ganhou! +1';PL.eu++;}
+    else if(minha.pts<advP){document.getElementById('b-adv').className='bcard win';document.getElementById('b-eu').className='bcard lose';document.getElementById('b-res').textContent='Oponente ganhou!';PL.adv++;}
+    else document.getElementById('b-res').textContent='Empate!';
+    document.getElementById('pl-eu').textContent=PL.eu;
+    document.getElementById('pl-adv').textContent=PL.adv;
+    salvar();
+  },500);
+}
+function resetBafo(){
+  PL={eu:0,adv:0};salvar();
+  document.getElementById('pl-eu').textContent=0;document.getElementById('pl-adv').textContent=0;
+  document.getElementById('b-res').textContent='';
+  document.getElementById('b-eu').className='bcard';document.getElementById('b-adv').className='bcard';
+  document.getElementById('b-eu-em').textContent='?';document.getElementById('b-eu-nm').textContent='toque para jogar';document.getElementById('b-eu-pt').textContent='';
+  document.getElementById('b-adv-em').textContent='?';document.getElementById('b-adv-nm').textContent='';document.getElementById('b-adv-pt').textContent='';
+}
+
+renderAlbum();
+document.getElementById('pl-eu').textContent=PL.eu;
+document.getElementById('pl-adv').textContent=PL.adv;
+</script>
+</body>
+</html>
