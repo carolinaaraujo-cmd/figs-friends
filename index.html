@@ -317,15 +317,34 @@ let modalTrocaData=null;
 // ===================== AUTH =====================
 function gerarCodigo(){return Math.random().toString(36).substring(2,8).toUpperCase();}
 
+async function verificarNomeUnico(nome){const {data}=await sb.from("usuarios").select("id").ilike("nome",nome);return !data||data.length===0;}
+
+async function verificarNome(nome){
+  const {data}=await sb.from('usuarios').select('id').ilike('nome',nome);
+  return !data||data.length===0;
+}
+
+function mostrarAvisoCodigo(codigo){
+  document.getElementById('aviso-codigo-val').textContent=codigo;
+  document.getElementById('aviso-codigo').style.display='flex';
+}
+
+function fecharAviso(){
+  document.getElementById('aviso-codigo').style.display='none';
+  iniciarApp();
+}
+
 async function entrarNovo(){
   const nome=document.getElementById('login-nome').value.trim();
   if(!nome){showErr('Digite seu apelido!');return;}
+  const unico=await verificarNome(nome);
+  if(!unico){showErr('Esse apelido ja existe! Tente "'+nome+'2" ou adicione sua cidade.');return;}
   const codigo=gerarCodigo();
   const {data,error}=await sb.from('usuarios').insert({nome,codigo_convite:codigo}).select().single();
   if(error){showErr('Erro ao criar conta: '+error.message);return;}
   EU=data;
   localStorage.setItem('fig_meu_codigo',codigo);
-  iniciarApp();
+  mostrarAvisoCodigo(codigo);
 }
 
 async function entrarComConvite(){
@@ -334,12 +353,14 @@ async function entrarComConvite(){
   if(!conv||!nome){showErr('Preencha o codigo e seu apelido!');return;}
   const {data:dono}=await sb.from('usuarios').select('*').eq('codigo_convite',conv).single();
   if(!dono){showErr('Codigo de convite invalido!');return;}
+  const unico=await verificarNome(nome);
+  if(!unico){showErr('Esse apelido ja existe! Tente "'+nome+'2" ou adicione sua cidade.');return;}
   const codigo=gerarCodigo();
   const {data,error}=await sb.from('usuarios').insert({nome,codigo_convite:codigo}).select().single();
   if(error){showErr('Erro: '+error.message);return;}
   EU=data;
   localStorage.setItem('fig_meu_codigo',codigo);
-  iniciarApp();
+  mostrarAvisoCodigo(codigo);
 }
 
 async function voltarComCodigo(){
@@ -745,5 +766,19 @@ function notif(msg,tipo){const el=document.getElementById('notif');el.textConten
   if(ok){iniciarApp();}
 })();
 </script>
+
+<!-- AVISO CODIGO -->
+<div id="aviso-codigo" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:300;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#181c25;border:2px solid #EF9F27;border-radius:12px;padding:2rem;width:100%;max-width:400px;text-align:center">
+    <div style="font-size:40px;margin-bottom:12px">⚠️</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#EF9F27;letter-spacing:1px;margin-bottom:8px">SALVA SEU CODIGO!</div>
+    <p style="font-size:13px;color:#9aa0b0;margin-bottom:16px">Esse e o seu codigo pessoal. Se fechar o site ou abrir em outro celular, vai precisar dele pra entrar. <strong style="color:#f0f0f0">Tira um print agora!</strong></p>
+    <div style="background:#1e2330;border:2px dashed #EF9F27;border-radius:8px;padding:16px;margin-bottom:20px">
+      <div style="font-size:11px;color:#9aa0b0;margin-bottom:6px">Seu codigo pessoal:</div>
+      <div style="font-family:monospace;font-size:32px;font-weight:700;color:#EF9F27;letter-spacing:6px" id="aviso-codigo-val"></div>
+    </div>
+    <button onclick="fecharAviso()" style="width:100%;padding:12px;background:#1D9E75;border:none;border-radius:8px;color:#fff;font-size:14px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer">Ja printei, pode entrar! ✓</button>
+  </div>
+</div>
 </body>
 </html>
